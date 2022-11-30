@@ -32,21 +32,21 @@ public class ApiTest {
     @Test
     @DisplayName("API 성공 테스트")
     public void Api_200() throws Exception {
-        mockMvc.perform(get("/student/1"))
+        mockMvc.perform(get("/students/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.message").value("학생 조회 성공"))
-                .andExpect(jsonPath("$.result.name").value("yewon"))
-                .andExpect(jsonPath("$.result.dept").value("computer-system"))
+                .andExpect(jsonPath("$.data.name").value("yewon"))
+                .andExpect(jsonPath("$.data.dept").value("computer-system"))
                 .andDo(print());
     }
 
     @Test
     @DisplayName("API 실패 테스트")
     public void Api_400() throws Exception {
-        mockMvc.perform(get("/student/99"))
+        mockMvc.perform(get("/students/99"))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.message").value("학생 조회 실패"))
-                .andExpect(jsonPath("$.result").isEmpty())
+                .andExpect(jsonPath("$.data").isEmpty())
                 .andDo(print());
 
     }

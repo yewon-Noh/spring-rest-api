@@ -25,7 +25,7 @@ public class ApiController {
     }
 
 
-    @GetMapping("/student/{id}")
+    @GetMapping("/students/{id}")
     public ResponseEntity<RestResponse> find(@PathVariable Long id) {
         RestResponse<Object> restResponse = new RestResponse<>();
         Optional<Student> student = studentService.find(id);
@@ -34,7 +34,7 @@ public class ApiController {
                     .code(HttpStatus.OK.value())
                     .httpStatus(HttpStatus.OK)
                     .message(Message.READ_STUDENTS.label())
-                    .result(student)
+                    .data(student)
                     .build();
         } else {
             restResponse = RestResponse.builder()
